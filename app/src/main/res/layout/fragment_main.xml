@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    >
+    <!-- 重写这里应该能实现点击了以后切换 -->
+<android.support.v4.view.ViewPager
+    android:id="@+id/view_pager"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingLeft="80dp"
+    android:paddingRight="80dp"
+    android:background="@color/colorAccent">
+</android.support.v4.view.ViewPager>
+</LinearLayout>

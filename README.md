@@ -1,2 +1,2 @@
-# demo_
+# demo_SmallViewPagerWithSlideDemo
 ViewPager滑动Item出去的一种简单实现
