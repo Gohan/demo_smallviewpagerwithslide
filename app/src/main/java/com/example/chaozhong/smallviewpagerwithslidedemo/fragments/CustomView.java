@@ -20,6 +20,8 @@ public class CustomView extends FrameLayout implements GestureDetector.OnGesture
     FrameLayout mRootView = null;
     PointF mDownPoint = null;
     PointF mCurrentPoint = null;
+    private int mPosition;
+    public static int sActivePosition;
 
     public CustomView(Context context) {
         super(context);
@@ -48,7 +50,7 @@ public class CustomView extends FrameLayout implements GestureDetector.OnGesture
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (isClickable()) {
+        if (isClickable() && sActivePosition == mPosition) {
             mCompat.onTouchEvent(event);
             switch (event.getActionMasked()) {
                 case MotionEvent.ACTION_UP:
@@ -113,5 +115,9 @@ public class CustomView extends FrameLayout implements GestureDetector.OnGesture
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         Log.i("GOHAN", "onFling");
         return false;
+    }
+
+    public void setPosition(int position) {
+        this.mPosition = position;
     }
 }

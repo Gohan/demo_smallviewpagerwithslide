@@ -10,13 +10,14 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.chaozhong.smallviewpagerwithslidedemo.R;
 
 /**
  * Created by chaozhong on 5/25/16.
  */
-public class MyFragment extends DialogFragment {
+public class MyFragment extends DialogFragment implements ViewPager.OnPageChangeListener {
 
     ViewPager mViewPager;
     PagerAdapter mViewPagerAdapter;
@@ -31,11 +32,35 @@ public class MyFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
+        LinearLayout view = (LinearLayout) v;
+
         mViewPagerAdapter = new MyPagerAdapter();
         mViewPager = (ViewPager) v.findViewById(R.id.view_pager);
         mViewPager.setAdapter(mViewPagerAdapter);
         mViewPager.setPageMargin(100);
+        mViewPager.addOnPageChangeListener(this);
         return v;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mViewPager.removeOnPageChangeListener(this);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        CustomView.sActivePosition = position;
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 
     public static class MyPagerAdapter extends PagerAdapter {
@@ -52,7 +77,8 @@ public class MyFragment extends DialogFragment {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            View view = LayoutInflater.from(container.getContext()).inflate(R.layout.item_viewpager, container, false);
+            CustomView view = (CustomView) LayoutInflater.from(container.getContext()).inflate(R.layout.item_viewpager, container, false);
+            view.setPosition(position);
             container.addView(view);
             return new MyViewHolder(view);
         }
